@@ -1,4 +1,4 @@
-import time
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -27,7 +27,7 @@ class UploadFile(models.Model):
     """
     name = models.CharField(max_length=50)
     file = models.FileField(upload_to='./upload')
-    ctime = models.DateTimeField(default=time.strftime('%Y-%m-%d %H:%M:%S'))
+    ctime = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 't_upload_file'

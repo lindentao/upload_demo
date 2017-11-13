@@ -37,17 +37,11 @@ def upload(request):
 
             for line in request.FILES.get("file", None):
                 list_line = line.decode().replace('\n', '').replace('"', '').split(',')
-                v = ValuePlan()
-                v.code = list_line[0]
-                v.category = list_line[1]
-                v.vehicle = list_line[2]
-                v.effective_date = list_line[3]
-                v.effective_first = list_line[4]
-                v.effective_last = list_line[5]
-                v.value = list_line[6]
-                v.src = list_line[7]
+                v = ValuePlan(code=list_line[0], category=list_line[1], vehicle=list_line[2],
+                              effective_date=list_line[3], effective_first=list_line[4], effective_last=list_line[5],
+                              value=list_line[6], src=list_line[7])
                 v.save()
-            return HttpResponse("upload over!")
+            return HttpResponse("upload success!")
     else:
         form = UploadFileForm()
     return render_to_response('upload.html', {'form': form})
